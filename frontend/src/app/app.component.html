@@ -14,27 +14,6 @@
     </ul>
   </nav>
   <main class="main">
-    <div class="content">
-      <table>
-        <thead>
-          <tr>
-            <th *ngFor="let head of headElements" scope="col">{{head}}</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let el of elements">
-            <td>{{el.player_id}}</td>
-            <td>{{el.name}}</td>
-            <td>{{el.nationality}}</td>
-            <td>{{el.position}}</td>
-            <td>{{el.overall}}</td>
-            <td>{{el.age}}</td>
-            <td>{{el.hits}}</td>
-            <td>{{el.potential}}</td>
-            <td>{{el.team}}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+    <router-outlet></router-outlet>
   </main>
 </div>
