@@ -2,6 +2,21 @@ const db = require("../models");
 const Player = db.players;
 const Op = db.Sequelize.Op;
 
+const getPagination = (page, size) => {
+  const limit = size ? +size : 3;
+  const offset = page ? page * limit : 0;
+
+  return { limit, offset };
+};
+
+const getPagingData = (data, page, limit) => {
+  const { count: totalItems, rows: players } = data;
+  const currentPage = page ? +page : 0;
+  const totalPages = Math.ceil(totalItems / limit);
+
+  return { totalItems, players, totalPages, currentPage };
+};
+
 // Create and Save a new Player
 exports.create = (req, res) => {
     // Validate request
@@ -38,6 +53,28 @@ exports.create = (req, res) => {
 };
 
 // Retrieve all Player from the database.
+
+exports.findAll = (req, res) => {
+  const { page, size, name } = req.query;
+  var condition = name ? { name: { [Op.like]: `%${name}%` } } : null;
+
+  const { limit, offset } = getPagination(page, size);
+
+  Player.findAndCountAll({ where: condition, limit, offset })
+    .then(data => {
+      const response = getPagingData(data, page, limit);
+      res.send(response);
+    })
+    .catch(err => {
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving players."
+      });
+    });
+};
+
+//OLD findAll
+/*
 exports.findAll = (req, res) => {
     const name = req.query.name;
     var condition = name ? { name: { [Op.like]: `%${name}%` } } : null;
@@ -53,6 +90,7 @@ exports.findAll = (req, res) => {
         });
         });
 };
+*/
 
 // Find a single Player with an id
 exports.findOne = (req, res) => {
