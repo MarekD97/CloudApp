@@ -1,1 +1,73 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap');
+
+body {
+  box-sizing: border-box;
+  margin: 0;
+  font-family: 'Open Sans', sans-serif;
+}
+
+a {
+  text-decoration: none;
+  color: #FFF;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+.navbar {
+  background-color: #8FC27E;
+  padding: 25px 90px;
+  color: #FFF;
+  display: flex;
+  justify-content: space-between;
+}
+
+.navbar-logo {
+  font-size: 36px;
+  font-weight: bold;
+}
+
+.navbar-menu {
+  display: flex;
+  font-size: 18px;
+  margin: 0;
+  align-items: center;
+  list-style-type: none;
+}
+
+.navbar-item {
+  margin: 0 12px;
+}
+
+.main {
+  width: 100%;
+  background-color: #888888;
+  padding: 15vh 0;
+}
+
+.content {
+  background-color: #FFF;
+  margin: 0 90px;
+  padding: 5%;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+table, td, th {
+  border: 1px solid #888888;
+  padding: 8px;
+}
+
+th {
+  background-color: #8FC27E;
+  color: #FFF;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.form-item {
+  display: flex;
+  flex-direction: column;
+}
