@@ -1,0 +1,6 @@
+<div class="content">
+  <span *ngIf="message">{{message}}</span>
+  <h1 style="font-weight: normal;">Edit player</h1>
+  <app-form *ngIf="playerData" [item]="playerData" (result)="onSubmit($event)">
+  </app-form>
+</div>

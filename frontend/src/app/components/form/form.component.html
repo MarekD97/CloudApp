@@ -1,0 +1,40 @@
+<form [formGroup]="ngForm" (ngSubmit)="onSubmit(ngForm)">
+  <div class="form-content">
+    <label for="name">
+      <span>Name</span>
+      <input id="name" formControlName="name">
+    </label>
+    <label for="nationality">
+      <span>Nationality</span>
+      <input id="nationality" formControlName="nationality">
+    </label>
+    <label for="position">
+      <span>Position</span>
+      <input id="position" formControlName="position">
+    </label>
+    <label for="overall">
+      <span>Overall</span>
+      <input id="overall" formControlName="overall">
+    </label>
+    <label for="age">
+      <span>Age</span>
+      <input id="age" formControlName="age">
+    </label>
+    <label for="hits">
+      <span>Hits</span>
+      <input id="hits" formControlName="hits">
+    </label>
+    <label for="potential">
+      <span>Potential</span>
+      <input id="potential" formControlName="potential">
+    </label>
+    <label for="team">
+      <span>Team</span>
+      <input id="team" formControlName="team">
+    </label>
+  </div>
+  <div class="form-buttons">
+    <button type="sumbit" class='btn'>Sumbit</button>
+    <a routerLink="/" class="btn btn-cancel">Cancel</a>
+  </div>
+</form>

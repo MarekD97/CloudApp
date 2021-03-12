@@ -55,7 +55,9 @@ exports.create = (req, res) => {
 // Retrieve all Player from the database.
 
 exports.findAll = (req, res) => {
-  const { page, size, name } = req.query;
+  let { page, size, name } = req.query;
+  if (page === undefined) page = 0;
+  if (size === undefined) size = 20;
   var condition = name ? { name: { [Op.like]: `%${name}%` } } : null;
 
   const { limit, offset } = getPagination(page, size);

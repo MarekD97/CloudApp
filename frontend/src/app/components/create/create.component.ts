@@ -1,6 +1,7 @@
 import { ClientService } from 'src/app/services/service.service';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create',
@@ -9,20 +10,22 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class CreateComponent implements OnInit {
 
-  elements: Array<string>;
-  createForm: FormGroup;
-  constructor(private service: ClientService) {
-    this.elements = this.service.headElements;
-    this.createForm = new FormGroup(
-      this.elements.reduce((o, key) => Object.assign(o, {[key]: new FormControl('', [Validators.required])}), {})
-    );
+  message: string;
+  constructor(private service: ClientService, private router: Router) {
+    this.message = '';
   }
 
   ngOnInit(): void {
   }
 
   onSubmit(fg: FormGroup): void {
-    console.log(fg);
+    this.service.create(fg.value).subscribe(response => {
+      this.message = "New player added.";
+      this.router.navigate(['/']);
+    },
+    error => {
+      this.message = error.statusText;
+    })
   }
 
 }

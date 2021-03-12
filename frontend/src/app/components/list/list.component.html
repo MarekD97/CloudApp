@@ -1,22 +1,45 @@
 <div class="content">
-  <table>
+  <div class="filter">
+    <p>Filter by name:</p>
+    <input type="text" (input)="updateName($event.target)">
+  </div>
+  <table *ngIf="elements.length > 0; else empty">
     <thead>
       <tr>
         <th *ngFor="let head of headElements" scope="col">{{head}}</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let el of elements">
-        <td>{{el.player_id}}</td>
-        <td>{{el.name}}</td>
-        <td>{{el.nationality}}</td>
-        <td>{{el.position}}</td>
-        <td>{{el.overall}}</td>
-        <td>{{el.age}}</td>
-        <td>{{el.hits}}</td>
-        <td>{{el.potential}}</td>
-        <td>{{el.team}}</td>
+      <tr *ngFor="let element of elements | paginate: { itemsPerPage: size, currentPage: page+1, totalItems: totalItems }"
+        routerLink="/details/{{element.player_id}}"
+      >
+        <td>{{element.player_id}}</td>
+        <td>{{element.name}}</td>
+        <td>{{element.nationality}}</td>
+        <td>{{element.position}}</td>
+        <td>{{element.overall}}</td>
+        <td>{{element.age}}</td>
+        <td>{{element.hits}}</td>
+        <td>{{element.potential}}</td>
+        <td>{{element.team}}</td>
       </tr>
     </tbody>
   </table>
+  <ng-template #empty>
+    <h3>
+      No data
+    </h3>
+  </ng-template>
+  <div class="pagination">
+    <pagination-controls
+      (pageChange)="pageChanged($event)"
+      >
+    </pagination-controls>
+    <span>Number of items:
+      <select [ngModel]="selectCount"
+            (ngModelChange)="sizeChanged($event)">
+        <option *ngFor="let i of numberOfElements" [value]="i">{{i}}</option>
+      </select>
+    </span>
+  </div>
 </div>

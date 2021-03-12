@@ -1,0 +1,54 @@
+<div class="content">
+  <span *ngIf="message">{{message}}</span>
+  <h1>Player details</h1>
+  <table *ngIf="playerData">
+    <tbody>
+      <tr>
+        <td>Player ID</td>
+        <td>{{playerData.player_id}}</td>
+      </tr>
+      <tr>
+        <td>Name</td>
+        <td>{{playerData.name}}</td>
+      </tr>
+      <tr>
+        <td>Nationality</td>
+        <td>{{playerData.nationality}}</td>
+      </tr>
+      <tr>
+        <td>Position</td>
+        <td>{{playerData.position}}</td>
+      </tr>
+      <tr>
+        <td>Overall</td>
+        <td>{{playerData.overall}}</td>
+      </tr>
+      <tr>
+        <td>Age</td>
+        <td>{{playerData.age}}</td>
+      </tr>
+      <tr>
+        <td>Hits</td>
+        <td>{{playerData.hits}}</td>
+      </tr>
+      <tr>
+        <td>Potential</td>
+        <td>{{playerData.potential}}</td>
+      </tr>
+      <tr>
+        <td>Team</td>
+        <td>{{playerData.team}}</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="form-buttons">
+    <a routerLink="/edit/{{playerId}}" class='btn'>Edit</a>
+    <button (click)="deleteConfirm = true" class='btn btn-delete'>Delete</button>
+    <button routerLink="/" class="btn btn-cancel">Cancel</button>
+  </div>
+  <div *ngIf="deleteConfirm">
+    Are you sure?
+    <button (click)="deleteItem(playerId)" class="btn btn-delete">Yes, delete it</button>
+    <button (click)="deleteConfirm = false" class="btn btn-cancel">No</button>
+  </div>
+</div>
