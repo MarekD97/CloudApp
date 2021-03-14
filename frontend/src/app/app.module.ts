@@ -12,6 +12,7 @@ import { ListComponent } from './components/list/list.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { DetailsComponent } from './components/details/details.component';
+import { StatsComponent } from './components/stats/stats.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { DetailsComponent } from './components/details/details.component';
     EditComponent,
     FormComponent,
     DetailsComponent,
+    StatsComponent,
   ],
   imports: [
     BrowserModule,

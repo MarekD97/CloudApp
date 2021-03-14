@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 
 // API endpoint
 const baseURL = 'http://localhost:8080/api/players';
+const statsURL = 'http://localhost:8080/api/stats';
 
 @Injectable({
   providedIn: 'root'
@@ -41,5 +42,9 @@ export class ClientService {
 
   delete(id: any): Observable<any> {
     return this.http.delete(`${baseURL}/${id}`);
+  }
+
+  getStats(type: string): Observable<any> {
+    return this.http.get(`${statsURL}/${type}`);
   }
 }

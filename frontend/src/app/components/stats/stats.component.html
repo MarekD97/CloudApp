@@ -1,0 +1,36 @@
+<div class="content">
+  Select type:
+  <select [ngModel]="selectStats" (ngModelChange)="updateStatsType($event)">
+    <option *ngFor="let i of statsType" [value]="i.value">{{i.name}}</option>
+  </select>
+  <h1 style="font-weight: normal;">{{currentStats.name}}</h1>
+  <table *ngIf="statsData && statsData.length > 0; else empty">
+    <thead>
+      <tr>
+        <th *ngIf="statsData[0].nationality">Nationality</th>
+        <th *ngIf="statsData[0].team">Team</th>
+        <th *ngIf="statsData[0].averageOverall">Average overall</th>
+        <th *ngIf="statsData[0].averageAge">Average age</th>
+        <th *ngIf="statsData[0].averagePotential">Average potential</th>
+        <th *ngIf="statsData[0].totalHits">Total hits</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let element of statsData"
+      >
+        <td *ngIf="element.nationality">{{element.nationality}}</td>
+        <td *ngIf="element.team">{{element.team}}</td>
+        <td *ngIf="element.averageOverall">{{element.averageOverall}}</td>
+        <td *ngIf="element.averageAge">{{element.averageAge}}</td>
+        <td *ngIf="element.averagePotential">{{element.averagePotential}}</td>
+        <td *ngIf="element.totalHits">{{element.totalHits}}</td>
+      </tr>
+    </tbody>
+  </table>
+  <ng-template #empty>
+    <h3>
+      No data
+    </h3>
+  </ng-template>
+</div>
+
