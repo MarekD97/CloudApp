@@ -1,3 +1,4 @@
+const { sequelize } = require("../models");
 const db = require("../models");
 const Player = db.players;
 const Op = db.Sequelize.Op;
@@ -176,18 +177,91 @@ exports.deleteAll = (req, res) => {
         });
 };
 
-// Find all published Players
-/*
-exports.findAllPublished = (req, res) => {
-    Tutorial.findAll({ where: { published: true } })
-    .then(data => {
-      res.send(data);
-    })
-    .catch(err => {
-      res.status(500).send({
-        message:
-          err.message || "Some error occurred while retrieving Players."
-      });
+// Compute average age by nationality
+exports.getAverageAge = (req, res) => {
+  Player.findAll({
+    attributes: ['nationality', [sequelize.fn('AVG', sequelize.col('age')), 'averageAge']],
+    group: ['nationality']
+  })
+  .then(data => {
+    res.send(data);
+  })
+  .catch(err => {
+    res.status(500).send({
+      message:
+        err.message || "Some error occurred while computing an average Players."
     });
+  });
 };
-*/
+
+// Compute average overall by team
+exports.getAverageOverall = (req, res) => {
+  Player.findAll({
+    attributes: ['team', [sequelize.fn('AVG', sequelize.col('overall')), 'averageOverall']],
+    group: ['team'],
+    order: [[sequelize.fn('AVG', sequelize.col('overall')), 'DESC']] //From the best to the worst
+  })
+  .then(data => {
+    res.send(data);
+  })
+  .catch(err => {
+    res.status(500).send({
+      message:
+        err.message || "Some error occurred while computing an average Players."
+    });
+  });
+};
+
+// Compute average potential by nationality
+exports.getAveragePotential = (req, res) => {
+  Player.findAll({
+    attributes: ['nationality', [sequelize.fn('AVG', sequelize.col('potential')), 'averagePotential']],
+    group: ['nationality'],
+    order: [[sequelize.fn('AVG', sequelize.col('potential')), 'DESC']] //From the best to the worst
+  })
+  .then(data => {
+    res.send(data);
+  })
+  .catch(err => {
+    res.status(500).send({
+      message:
+        err.message || "Some error occurred while computing an average Players."
+    });
+  });
+};
+
+// Compute average potential by nationality
+exports.getAveragePotential = (req, res) => {
+  Player.findAll({
+    attributes: ['nationality', [sequelize.fn('AVG', sequelize.col('potential')), 'averagePotential']],
+    group: ['nationality'],
+    order: [[sequelize.fn('AVG', sequelize.col('potential')), 'DESC']] //From the best to the worst
+  })
+  .then(data => {
+    res.send(data);
+  })
+  .catch(err => {
+    res.status(500).send({
+      message:
+        err.message || "Some error occurred while computing an average Players."
+    });
+  });
+};
+
+// Get total hits by team
+exports.getTotalHits = (req, res) => {
+  Player.findAll({
+    attributes: ['team', [sequelize.fn('SUM', sequelize.col('hits')), 'totalHits']],
+    group: ['team'],
+    order: [[sequelize.fn('SUM', sequelize.col('hits')), 'DESC']] //From the best to the worst
+  })
+  .then(data => {
+    res.send(data);
+  })
+  .catch(err => {
+    res.status(500).send({
+      message:
+        err.message || "Some error occurred while computing an average Players."
+    });
+  });
+};
