@@ -3,8 +3,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 // API endpoint
-const baseURL = 'http://localhost:8080/api/players';
-const statsURL = 'http://localhost:8080/api/stats';
+const baseURL = 'http://192.168.33.10:8080/api/players';
+const statsURL = 'http://192.168.33.10:8080/api/stats';
 
 @Injectable({
   providedIn: 'root'
