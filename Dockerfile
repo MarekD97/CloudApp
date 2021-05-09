@@ -1,7 +1,13 @@
+# Frontend build
+FROM node:14 AS build
+WORKDIR /usr/src/app
+COPY frontend/ .
+RUN npm install && npm run build
+
 # Frontend
 FROM nginx:alpine AS frontend
 EXPOSE 8081
-COPY frontend/dist/frontend /usr/share/nginx/html
+COPY --from=build /usr/src/app/dist/frontend /usr/share/nginx/html
 
 # BACKEND
 FROM node:14 AS backend
