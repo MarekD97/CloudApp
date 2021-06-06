@@ -18,6 +18,10 @@ metadata:
   labels:
     app: db
 spec:
+  volumes:
+    - name: db-persistent-volume
+      persistentVolumeClaim:
+        claimName: db-persistent-volume-claim
   containers:
     - image: cloudapp_db
       name: db-container
@@ -26,6 +30,9 @@ spec:
         - containerPort: 3306
           name: http
           protocol: TCP
+      volumeMounts:
+        - mountPath: /var/lib/mysql
+          name: db-persistent-volume
       livenessProbe:
         tcpSocket:
           port: 3306
