@@ -8,6 +8,8 @@ RUN npm install && npm run build
 FROM nginx:alpine AS frontend
 EXPOSE 8081
 COPY --from=build /usr/src/app/dist/frontend /usr/share/nginx/html
+RUN rm /etc/nginx/conf.d/default.conf
+COPY frontend/frontend.conf /etc/nginx/conf.d
 
 # BACKEND
 FROM node:14 AS backend
