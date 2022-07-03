@@ -5,7 +5,7 @@ const cors = require("cors");
 const app = express();
 
 var corsOptions = {
-  origin: "http://localhost:8081"
+  origin: process.env.FRONTEND_ORIGIN || "http://localhost:8081",
 };
 
 app.use(cors(corsOptions));
@@ -26,7 +26,10 @@ db.sequelize.sync();
 
 // simple route
 app.get("/", (req, res) => {
-  res.json({ message: "FIFA 2021 Complete Player Dataset. This Data set contains data of the players in FIFA-2021." });
+  res.json({
+    message:
+      "FIFA 2021 Complete Player Dataset. This Data set contains data of the players in FIFA-2021.",
+  });
 });
 
 require("./app/routes/player.routes")(app);
